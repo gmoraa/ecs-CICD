@@ -15,4 +15,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: cd backend && docker build . --file Dockerfile --tag cicd:$(date +%s)
+      #run: cd backend && docker build . --file Dockerfile --tag cicd:$(date +%s)
+      run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_REPOSITORY }}
