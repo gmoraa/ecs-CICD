@@ -18,4 +18,4 @@ jobs:
       env: 
         AWS_REGION: ${{ secrets.AWS_REGION }}
         AWS_ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
-      run: aws ecr get-login-password --region "$AWS_REGION" | docker login --username AWS --password-stdin "$AWS_ECR_REPOSITORY"
+      run: docker login -u AWS -p $(aws ecr get-login-password --region "$AWS_REGION") "$AWS_ECR_REPOSITORY"
